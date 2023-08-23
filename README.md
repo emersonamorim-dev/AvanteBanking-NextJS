@@ -1,8 +1,6 @@
 ## Avante Banking - Banco Digital - NextJS
 
-Codificação de Frontend em NextJS programado em Typescript do AVANTE BANKING - Banco Digital  para estilização usei o Chakra UI para deixar o layout elegante e bastante criativo para o Banco Digital.
-Este é um aplicativo Next.js completo para Banking que é dividido em components, pages e routes.
-
+Codificação de Frontend em NextJS programado em Typescript para o AVANTE BANKING - Banco Digital para estilização usei o Chakra UI para deixar o layout elegante e bastante criativo. Este é um aplicativo Next.js completo para Banking que é dividido em components, pages e routes.
 ## Components
 Os components são os blocos de construção básicos do aplicativo. Eles são responsáveis por renderizar a interface do usuário e manipular os dados.
 
