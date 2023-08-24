@@ -119,7 +119,7 @@ const Login = () => {
   return (
     <ChakraProvider>
       <Head>
-        <title>Nextbank - Banco Digital</title>
+        <title>Avante Banking - Banco Digital</title>
       </Head>
 
       <Box pt="120px" bg="rgb(245, 245, 245)" w="50%" h="100vh">
