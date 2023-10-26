@@ -4,15 +4,25 @@ import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
 const Footer = () => {
   return (
     <>
-      <Flex w="100%" h="1%" direction="row">
+
+      <Flex
+        w="100%"
+        h="1%"
+        direction={{ base: "column", md: "row" }}
+      >
         <Box flex="1" p={8} textAlign="left" backgroundColor="#0F4F2D"></Box>
         <Box flex="1" p={8} textAlign="left" backgroundColor="#349431"></Box>
       </Flex>
-      <Box bg="#DDC20C" color="#257A36" p={6} px={10}>
+
+      <Box bg="#DDC20C" color="#257A36" p={6} px={{ base: 4, md: 10 }}>
         <VStack spacing={6} align="start">
           <Text fontSize="2xl" fontWeight="bold">Avante Banking</Text>
 
-          <Flex width="90%" justifyContent="space-between">
+          <Flex
+            width="90%"
+            justifyContent="space-between"
+            flexWrap={{ base: "wrap", md: "nowrap" }}
+          >
             <VStack align="start" spacing={2}>
               <Text fontWeight="bold" color="#2F962B">Sobre nós</Text>
               <Link>Carreiras</Link>
@@ -44,21 +54,6 @@ const Footer = () => {
             </VStack>
 
             <VStack align="start" spacing={2}>
-              <Text fontWeight="bold" color="#2F962B">Veja também</Text>
-              <HStack><Link>Auxílio e FGTS</Link><Icon as={ChevronDownIcon} /></HStack>
-              <HStack><Link>Faça um Pix</Link><Icon as={ChevronDownIcon} /></HStack>
-              <HStack><Link>Fornecedores</Link><Icon as={ChevronDownIcon} /></HStack>
-              <HStack><Link>Transparência</Link><Icon as={ChevronDownIcon} /></HStack>
-            </VStack>
-          </Flex>
-
-          <Flex width="90%" justifyContent="space-between" mb={6}>
-            {/* Primeira linha de menus */}
-            {/* ... (restante do código anterior) ... */}
-          </Flex>
-
-          <Flex width="90%" justifyContent="space-between" mb={6}>
-            <VStack align="start" spacing={2}>
               <Text fontWeight="bold" color="#2F962B">Transparência</Text>
               <Link>Política de privacidade</Link>
               <Link>Política de segurança</Link>
@@ -68,34 +63,31 @@ const Footer = () => {
               <Link>Convenção de boletos</Link>
             </VStack>
 
-            <VStack align="start" spacing={2}>
-              <Text fontWeight="bold" color="#2F962B">Fale com a gente</Text>
-              <Text>Capitais e Regiões <br />
-                metropolitanas: <br />
-                4018 1818</Text>
-              <Text>Demais localidades: <br />
-                0800 181 1818</Text>
-              <Link href="mailto:meajuda@avantebanking.com.br">meajuda@avantebanking.com.br</Link>
-              <Text>Atendimento 24h</Text>
-            </VStack>
+          </Flex>
 
-            <VStack align="start" spacing={2}>
-              <Text fontWeight="bold" color="#2F962B">Ouvidoria</Text>
-              <Text>0800 181 1818</Text>
-              <Link href="mailto:ouvidoria@avantebanking.com.br">ouvidoria@avantebanking.com.br</Link>
-              <Text>Atendimento das <br />
-                9h às 18h (dias úteis)</Text>
-            </VStack>
+          <Flex
+            width="90%"
+            justifyContent="space-between"
+            flexWrap={{ base: "wrap", md: "nowrap" }}
+            mb={6}
+          >
 
-            <VStack align="start" spacing={2}>
-              <Text fontWeight="bold" color="#2F962B">Baixe o app</Text>
-            </VStack>
+          </Flex>
+
+          <Flex
+            width="90%"
+            justifyContent="space-between"
+            flexWrap={{ base: "wrap", md: "nowrap" }}
+            mb={6}
+          >
+
           </Flex>
 
           <Text>© 2023 Avante Banking S.A - Instituição Financeira Digital. 18.200.100/0001-00</Text>
           <Text>Rua sn, 18 - São Paulo, SP - 18000-000</Text>
         </VStack>
       </Box>
+
     </>
   );
 };
