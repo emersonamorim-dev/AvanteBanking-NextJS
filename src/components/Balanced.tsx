@@ -1,19 +1,26 @@
-import { Box, Heading, Text, Button, Icon } from "@chakra-ui/react";
+import { Box, Heading, Button, useBreakpointValue } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Image from 'next/image';
 
 const Balanced = () => {
+  // Use breakpoints para definir o tamanho da imagem de acordo com a largura da tela
+  const imageSize = useBreakpointValue({ base: '80%', md: '609px' });
+
   return (
     <Box
-      w="99vw"
-      h="100vh"
+      w="full"
+      minH="100vh"
       bg="gray.100"
       display="flex"
+      flexDirection={{ base: "column", md: "row" }}
       alignItems="center"
       justifyContent="space-between"
       padding="2rem"
     >
-      <Box>
+      <Box
+        textAlign={{ base: "center", md: "left" }}
+        marginBottom={{ base: "2rem", md: "0" }}
+      >
         <Heading as="h1" size="xl" marginBottom="1rem" color="yellow.400">
           Conheça nosso Cartão de Crédito
         </Heading>
@@ -34,14 +41,13 @@ const Balanced = () => {
       <Box 
         display="block"
         maxWidth="78%"
-        marginRight="20px"
-        float="right"
+        mx="auto" // Centraliza a imagem em telas pequenas
       >
         <Image 
-          src="/asserts/yellow-credit-card-avant-bank.jpg" // Substitua pelo caminho da sua imagem
+          src="/asserts/yellow-credit-card-avant-bank.jpg"
           alt="Imagem Descrição"
-          width={609} // Defina o valor de width conforme necessário
-          height={600} // Defina o valor de height conforme necessário
+          width={imageSize}
+          height={imageSize}
         />
       </Box>
     </Box>
@@ -49,3 +55,4 @@ const Balanced = () => {
 };
 
 export default Balanced;
+
