@@ -5,6 +5,7 @@ import {
   Text,
   Button,
   Icon,
+  Flex,
   VStack,
   Card,
   CardHeader,
@@ -22,45 +23,46 @@ import { MdAccountBalanceWallet, MdPix, MdPayments, MdOpenInBrowser, MdCurrencyB
 const Carousel = () => {
   const data = [
     {
-      icon: <Icon as={FaLandmark} boxSize={6}  />,
+      icon: <Icon as={FaLandmark} boxSize={6} />,
       title: "Banco Digital",
       text: "Os bancos digitais estão mudando o mundo, tornando as finanças mais justas e equitativas."
-    },    
+    },
     {
       icon: <Icon as={MdAccountBalanceWallet} boxSize={6} />,
       title: "Conta Digital",
       text: "Conta digital: a conta do futuro, disponível agora."
     },
-    
-    { 
-      icon: <Icon as={MdPix} boxSize={6} />, 
-      title: "Dinheiro Digital", 
-      text: "O Drex é a moeda do futuro, inovação financeira para todos os brasileiros." 
-    },
-    { 
-      icon: <Icon as={MdPayments} boxSize={6} />, 
-      title: "Pagamento Digital", 
-      text: "Pagamentos digitais são mais convenientes, seguros e eficientes." },
 
-    { 
-      icon: <Icon as={MdOpenInBrowser} boxSize={6} />, 
-      title: "Open Finance", 
-      text: "Open Finance: mais transparência, mais controle, mais opções para o consumidor." 
+    {
+      icon: <Icon as={MdPix} boxSize={6} />,
+      title: "Dinheiro Digital",
+      text: "O Drex é a moeda do futuro, inovação financeira para todos os brasileiros."
     },
-    { 
-      icon: <Icon as={MdCurrencyBitcoin} boxSize={6} />,  
-      title: "Cryptos", 
-      text: "As criptomoedas são uma forma de preservar o valor do seu dinheiro" 
+    {
+      icon: <Icon as={MdPayments} boxSize={6} />,
+      title: "Pagamento Digital",
+      text: "Pagamentos digitais são mais convenientes, seguros e eficientes."
     },
-    { 
-      icon: <Icon as={FaCoins} boxSize={6} />,  
-      title: "Corretora Digital", 
-      text: "A Corretora Digital é a escolha certa para quem quer investir com segurança e tranquilidade." 
+
+    {
+      icon: <Icon as={MdOpenInBrowser} boxSize={6} />,
+      title: "Open Finance",
+      text: "Open Finance: mais transparência, mais controle, mais opções para o consumidor."
     },
-    { 
-      icon: <Icon as={MdSafetyCheck} boxSize={6} />,  
-      title: "Seguros", 
-      text: "A segurança é o melhor negócio que você pode fazer." 
+    {
+      icon: <Icon as={MdCurrencyBitcoin} boxSize={6} />,
+      title: "Cryptos",
+      text: "As criptomoedas são uma forma de preservar o valor do seu dinheiro"
+    },
+    {
+      icon: <Icon as={FaCoins} boxSize={6} />,
+      title: "Corretora Digital",
+      text: "A Corretora Digital é a escolha certa para quem quer investir com segurança e tranquilidade."
+    },
+    {
+      icon: <Icon as={MdSafetyCheck} boxSize={6} />,
+      title: "Seguros",
+      text: "A segurança é o melhor negócio que você pode fazer."
     },
   ];
 
@@ -68,7 +70,7 @@ const Carousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 4, // padrão para telas maiores
     slidesToScroll: 1,
     nextArrow: (
       <Box
@@ -114,31 +116,44 @@ const Carousel = () => {
         ←
       </Box>
     ),
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
-
   return (
-    <Box p="20px" w="100%">
+
+    <Box p={{ base: "10px", md: "20px" }} w="100%">
       <Slider {...settings}>
         {data.map((item, index) => (
-          <Box
+          <Flex
             key={index}
             p={4}
             boxShadow="md"
             borderRadius="md"
             border="1px solid #e0e0e0"
-            marginRight={index !== data.length - 1 ? "20px" : "0"}
+            marginRight={{ base: "15px", md: "25px" }}
+            w={{ base: "280px", md: "280px", lg: "280px" }}
+            h={{ base: "200px", md: "200px", lg: "200px" }}
+            direction="column"
+            justify="space-between"
+            align="center"
           >
-            <VStack spacing={4}>
-              {item.icon}
-              <Heading size="md">{item.title}</Heading>
-              <Text>{item.text}</Text>
-              <Button >Saiba Mais</Button>
-            </VStack>
-          </Box>
+            {item.icon}
+            <Heading size={{ base: "sm", md: "md" }}>{item.title}</Heading>
+            <Text fontSize={{ base: "xs", md: "sm" }}>{item.text}</Text>
+            <Button fontSize={{ base: "xs", md: "sm" }}>Saiba Mais</Button>
+          </Flex>
         ))}
       </Slider>
     </Box>
+
   );
 };
 
 export default Carousel;
+
