@@ -1,41 +1,16 @@
 import React, { useState, useEffect } from "react";
 import {
-  Box,
-  Flex,
-  Link,
-  Menu,
-  MenuButton,
-  MenuItem,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  useDisclosure,
-  Input,
-  Checkbox,
-  FormControl,
-  FormLabel,
-  MenuList,
-  Button,
-  Text,
-  Icon,
-  Portal,
-  Slide,
-  VStack,
-
+  Box, Flex, Link, Icon, Menu, MenuButton, Button, Modal, ModalOverlay, ModalContent, Slide, Stack, MenuItem, ModalCloseButton, ModalBody, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerBody, IconButton, useDisclosure, VStack
 } from "@chakra-ui/react";
-import { ChevronDownIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ArrowForwardIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { motion } from 'framer-motion';
 import Widget from "./Widget";
 
 const Header = () => {
   const [showButton, setShowButton] = useState(false);
-  const [isSubMenuOpen, setSubMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const drawerDisclosure = useDisclosure();
 
   type MenuItemsType = {
     "Para Você": string[];
@@ -48,7 +23,6 @@ const Header = () => {
     "Para Seu Negócio": ["Conta Jurídica", "Investimentos", "Cartão Corporativo"],
     "O Avante Banking": ["Sobre nós", "Carreiras", "Imprensa"],
   };
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +44,7 @@ const Header = () => {
   type FullScreenSubMenuProps = {
     items: string[];
   };
-  
+
   const FullScreenSubMenu: React.FC<FullScreenSubMenuProps> = ({ items }) => (
     <Slide direction="top" in={true} style={{ zIndex: 4000 }}>
       <Box position="relative" top="20" left="0" right="0" bottom="0" bg="white">
@@ -84,14 +58,13 @@ const Header = () => {
       </Box>
     </Slide>
   );
-  
 
 
   return (
     <>
       <Box bg="#DDC20C" w="100%" p={4} color="#18622C" position="sticky" top="0" zIndex="1000">
         <Flex justify="space-between" align="center">
-          <Flex>
+          <Flex display={{ base: "none", md: "flex" }}>
             <Link
               mr={6}
               borderBottom="2px solid transparent"
@@ -118,11 +91,20 @@ const Header = () => {
                     {menuTitle}
                   </MenuButton>
                   {activeMenu === menuTitle && <FullScreenSubMenu items={menuItems[menuTitle as keyof typeof menuItems]} />}
-
                 </Menu>
               </div>
             ))}
           </Flex>
+
+          <IconButton
+            display={{ base: "block", md: "none" }}
+            aria-label="Open menu"
+            fontSize="20px"
+            color="#18622C"
+            variant="outline"
+            icon={<HamburgerIcon />}
+            onClick={drawerDisclosure.onOpen}
+          />
 
           <Flex align="center">
             <Link
@@ -133,7 +115,7 @@ const Header = () => {
               fontFamily="Graphik-Medium, Graphik-Regular, 'Gotham SSm A', 'Gotham SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif"
               borderBottom="2px solid transparent"
               _hover={{ borderBottomColor: "white", transition: "0.3s" }}
-              isExternal 
+              isExternal
             >
               Login <Icon as={ArrowForwardIcon} ml={2} />
             </Link>
@@ -148,16 +130,35 @@ const Header = () => {
               <ModalContent maxW="100vw" maxH="100vh" m="0" borderRadius="0">
                 <ModalCloseButton />
                 <ModalBody p="0">
-
                   <Widget />
-
                 </ModalBody>
               </ModalContent>
             </Modal>
           </Flex>
         </Flex>
-
       </Box>
+      <Drawer placement="left" isOpen={drawerDisclosure.isOpen} onClose={drawerDisclosure.onClose} >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerBody>
+            <VStack align="start" spacing={4}>
+              <Link
+                borderBottom="2px solid transparent"
+                _hover={{ borderBottomColor: "#257A36", transition: "0.3s" }}
+              >
+                Página Inicial
+              </Link>
+              {Object.keys(menuItems).map((menuTitle) => (
+                <Link key={menuTitle}>
+                  {menuTitle}
+                </Link>
+              ))}
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
       <Flex w="100%" h="10px" direction="row">
         <Box flex="1" h="10px" backgroundColor="#349431"></Box>
       </Flex>
