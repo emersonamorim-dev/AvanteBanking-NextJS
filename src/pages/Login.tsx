@@ -23,7 +23,6 @@ import { CheckCircleIcon, CheckIcon, CloseIcon, WarningIcon } from '@chakra-ui/i
 
 import Head from "next/head";
 
-
 const Login = () => {
 
   const [cpf, setCpf] = useState('');
@@ -34,10 +33,8 @@ const Login = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-
   const [isValidCpf, setIsValidCpf] = useState<boolean | null>(null);
   const [isValidPassword, setIsValidPassword] = useState<boolean | null>(null);
-
 
 
   const isValidCPF = (strCPF: string) => {
@@ -101,20 +98,14 @@ const Login = () => {
 
 
   const updateButtonDisabledState = (cpfValue: string, passwordValue: string) => {
-    // Verifica se os campos de CPF e senha estão preenchidos
     const areFieldsFilled = cpfValue.trim() !== '' && passwordValue.trim() !== '';
 
-    // Atualiza o estado do botão com base no preenchimento dos campos
     setIsButtonDisabled(!areFieldsFilled);
   };
-
-
 
   useEffect(() => {
     setIsValidCpf(cpf.length === 11);
   }, [cpf]);
-
-
 
   return (
     <ChakraProvider>
@@ -122,58 +113,65 @@ const Login = () => {
         <title>Avante Banking - Banco Digital</title>
       </Head>
 
-      <Box pt="120px" bg="rgb(245, 245, 245)" w="50%" h="100vh">
-        <Flex width="100vw" height="100vh">
-          <Box flex="1" >
+      <Box pt="120px" bg="rgb(245, 245, 245)" w={{ base: "100%", md: "50%" }} h="100vh">
+      <Flex 
+        direction={{ base: "column", md: "row" }} 
+        width="100vw" 
+        height="100vh"
+    >
+        <Box flex="1">
             <Center>
-              <Text
-                fontSize="42px"
-                mb="32px"
-                fontWeight="bold"
-                letterSpacing="-0.03em"
-                lineHeight="1.2"
-                color="rgb(17, 17, 17)"
-                fontFamily="Graphik-Medium, Graphik-Regular, 'Gotham SSm A', 'Gotham SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif"
-                textAlign="left"
-              >
-                Complete os campos ao <br />
-                lado para pedir sua Conta <br />
-                e Cartão de crédito
-              </Text>
-
+                <Text
+                    fontSize={{ base: "24px", md: "42px" }}
+                    mb="32px"
+                    fontWeight="bold"
+                    letterSpacing="-0.03em"
+                    lineHeight="1.2"
+                    color="rgb(17, 17, 17)"
+                    fontFamily="Graphik-Medium, Graphik-Regular, 'Gotham SSm A', 'Gotham SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+                    textAlign="left"
+                >
+                    Complete os campos ao <br />
+                    lado para pedir sua Conta <br />
+                    e Cartão de crédito
+                </Text>
             </Center>
             <Flex
-            direction={['column', 'row']}
-            justify="space-between"
-            bg="gray.100" 
-            w="100%"       
-            h="57vh"  
-          >
+                direction={{ base: "column", md: "row" }}
+                justify="space-between"
+                bg="gray.100" 
+                w="100%"       
+                h={{ base: "67vh", md: "57vh" }}
+            >
             <Box
-              flex="1"
-              bgImage="url(asserts/create-a-yellow-credit-card-named-avante-bank-18.jpg)"
-              bgSize="cover"
-              bgPosition="bottom"
+                flex="1"
+                bgImage="url(asserts/create-a-yellow-credit-card-named-avante-bank-18.jpg)"
+                bgSize="cover"
+                bgPosition={{ base: "center", md: "bottom" }}
             />
-          </Flex>
+
+            </Flex>
         </Box>
 
-          <Box ml="270px" flex="1" backgroundColor="white" h="80vh">
-
-            <VStack flex="1" spacing="4">
-              <FormControl id="cpf" mb={4} isInvalid={!isValidCpf && isTouched}>
-                <FormLabel
-                  htmlFor="cpf"
-                  mb="0"
-                  position="absolute"
-                  top={cpf || isFocused ? "10px" : "50%"}
-                  transform={cpf || isFocused ? "none" : "translateY(-50%)"}
-                  transition="all 0.3s"
-                >
-                </FormLabel>
-                <InputGroup>
-
-                  <Input
+        <Box 
+    ml={{ base: "0", md: "270px" }} 
+    flex="1" 
+    backgroundColor="white" 
+    h="80vh"
+>
+    <VStack flex="1" spacing="4">
+        <FormControl id="cpf" mb={4} isInvalid={!isValidCpf && isTouched}>
+            <FormLabel
+                htmlFor="cpf"
+                mb="0"
+                position="absolute"
+                top={cpf || isFocused ? "10px" : "50%"}
+                transform={cpf || isFocused ? "none" : "translateY(-50%)"}
+                transition="all 0.3s"
+            >
+            </FormLabel>
+            <InputGroup>
+                <Input
                     placeholder="CPF"
                     variant='flushed'
                     type="number"
@@ -190,42 +188,41 @@ const Login = () => {
                     fontFamily="Graphik-Medium, Graphik-Regular, 'Gotham SSm A', 'Gotham SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif"
                     fontSize="14px"
                     fontWeight="bold"
-                  />
+                />
 
-                  {isTouched && (
-                    <InputRightElement mr="126px"> {/* Ajuste a margem direita aqui */}
-                      <Circle
-                        size="22px"
-                        borderWidth="2px"
-                        borderColor={isValid ? "green.500" : "red.500"}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                      >
-                        {isValid ? (
-                          <CheckIcon color="green.500" />
-                        ) : (
-                          <CloseIcon color="red.500" />
-                        )}
-                      </Circle>
+                {isTouched && (
+                    <InputRightElement mr={{ base: "10px", md: "126px" }}>
+                        <Circle
+                            size="22px"
+                            borderWidth="2px"
+                            borderColor={isValid ? "green.500" : "red.500"}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            {isValid ? (
+                                <CheckIcon color="green.500" />
+                            ) : (
+                                <CloseIcon color="red.500" />
+                            )}
+                        </Circle>
                     </InputRightElement>
-                  )}
-                </InputGroup>
-                {!isValid && isTouched && (
-                  <FormHelperText
+                )}
+            </InputGroup>
+            {!isValid && isTouched && (
+                <FormHelperText
                     color="red.500"
                     fontSize="14px"
                     fontWeight="bold"
-                  >
+                >
                     Precisamos de um CPF válido.
-                  </FormHelperText>
-                )}
+                </FormHelperText>
+            )}
+        </FormControl>
 
-              </FormControl>
-
-              <FormControl id="email" isInvalid={isValidPassword === false && isTouched}>
-                <InputGroup>
-                  <Input
+        <FormControl id="email" isInvalid={isValidPassword === false && isTouched}>
+            <InputGroup>
+                <Input
                     type="password"
                     value={password}
                     variant='flushed'
@@ -242,26 +239,24 @@ const Login = () => {
                     fontFamily="Graphik-Medium, Graphik-Regular, 'Gotham SSm A', 'Gotham SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif"
                     fontSize="14px"
                     fontWeight="bold"
-                  />
-                </InputGroup>
-              </FormControl>
+                />
+            </InputGroup>
+        </FormControl>
 
-              <Button
-                colorScheme="yellow"
-                borderRadius="50px"
-                w="80%"
-                ml="-140px"
-                isDisabled={isButtonDisabled}
-              >
-                Continuar
-              </Button>
-            </VStack>
-
-          </Box>
+        <Button
+            colorScheme="yellow"
+            borderRadius="50px"
+            w="80%"
+            ml={{ base: "0", md: "-140px" }}
+            isDisabled={isButtonDisabled}
+        >
+            Continuar
+        </Button>
+    </VStack>
+</Box>
         </Flex>
       </Box>
     </ChakraProvider>
-
 
   );
 };
