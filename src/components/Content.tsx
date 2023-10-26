@@ -16,14 +16,11 @@ import {
 import { CheckIcon, ArrowForwardIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
-
-
-
 const Content = () => {
   const [cpf, setCpf] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
-  const [isFocused, setIsFocused] = useState(false); // Novo estado para controlar o foco
+  const [isFocused, setIsFocused] = useState(false);
   const toast = useToast();
 
   const isValidCPF = (strCPF: string) => {
@@ -48,8 +45,6 @@ const Content = () => {
     if (remainder !== parseInt(strCPF.substring(10, 11))) return false;
     return true;
   };
-
-
 
   const handleInputChange = (value: string) => {
     setCpf(value);
@@ -81,29 +76,50 @@ const Content = () => {
 
   return (
     <>
-      <Flex w="99vw" h="80vh" alignItems="center" justifyContent="space-between"
+      <Flex
+        w="99vw"
+        h="80vh"
+        alignItems="center"
+        justifyContent="space-between"
+        direction={{ base: "column-reverse", md: "row" }}
         bgImage="url(asserts/avant-bank-interface-18.jpg)"
         bgSize="cover"
         bgPosition="center"
         bgRepeat="no-repeat"
         px={6}
       >
-        <VStack alignItems="start" spacing={4} ml="40px">
-
-          <Text fontSize="3xl" fontWeight="bold">
+        <VStack
+          alignItems="start"
+          spacing={{ base: 2, md: 4 }}
+          ml={{ base: "10px", md: "40px" }}
+          mt={{ base: "20px", md: "0" }}
+        >
+          <Text
+            fontSize={{ base: "xl", md: "3xl" }}
+            fontWeight="bold"
+          >
             Avante Banking é um banco <br />
             que ajuda seus clientes a <br />
             prosperar, aproveitando as <br />
             oportunidades do futuro.
           </Text>
 
-          <Text>
+          <Text fontSize={{ base: "sm", md: "md" }}>
             Avante Banking: O banco que te impulsiona para o futuro. <br />
             A sua liberdade financeira começa aqui.
           </Text>
         </VStack>
 
-        <Box w="320px" h="295px" bg="white" p={6} borderRadius="md" boxShadow="md" mr="40px">
+        <Box
+          w={{ base: "100%", md: "320px" }}
+          h={{ base: "auto", md: "295px" }}
+          bg="white"
+          p={6}
+          borderRadius="md"
+          boxShadow="md"
+          mr={{ base: "0", md: "40px" }}
+          mb={{ base: "20px", md: "0" }}
+        >
           <Text fontSize="2xl" mb={4}>
             Peça sua conta e cartão de crédito do AvanteBank
           </Text>
@@ -116,7 +132,7 @@ const Content = () => {
               position="absolute"
               top={cpf || isFocused ? "10px" : "50%"}
               left="15px"
-              transform={cpf || isFocused ? "none" : "translateY(-50%)"} // Centraliza verticalmente quando não há CPF
+              transform={cpf || isFocused ? "none" : "translateY(-50%)"}
               transition="all 0.3s"
             >
               Digite seu CPF
